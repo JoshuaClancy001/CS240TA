@@ -12,8 +12,43 @@ import java.util.Objects;
 public class ChessBoard {
 
     private ChessPiece [][] board = new ChessPiece[9][9];
+    private ChessPosition blackKingPosition;
+    private ChessPosition whiteKingPosition;
+
+
+    public ChessPosition getBlackKingPosition(){
+        return this.blackKingPosition;
+    }
+
+    public ChessPosition getWhiteKingPosition(){
+        return this.whiteKingPosition;
+    }
+
+    public void setBlackKingPosition(ChessPosition blackKingPosition) {
+        this.blackKingPosition = blackKingPosition;
+    }
+
+    public void setWhiteKingPosition(ChessPosition whiteKingPosition) {
+        this.whiteKingPosition = whiteKingPosition;
+    }
 
     public ChessBoard() {
+
+    }
+
+    public void setKings(){
+        for(int i = 1; i < 9; i++){
+            for (int j = 1; j < 9; j++){
+                if (this.getPiece(new ChessPosition(i,j)) != null && this.getPiece(new ChessPosition(i,j)).getPieceType() == ChessPiece.PieceType.KING){
+                    if (this.getPiece(new ChessPosition(i,j)).getTeamColor() == ChessGame.TeamColor.WHITE){
+                        this.whiteKingPosition = new ChessPosition(i,j);
+                    }
+                    else{
+                        this.blackKingPosition = new ChessPosition(i,j);
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -35,6 +70,10 @@ public class ChessBoard {
      */
     public ChessPiece getPiece(ChessPosition position) {
         return this.board[position.getRow()][position.getColumn()];
+    }
+
+    public void removePiece(ChessPosition position){
+        this.board[position.getRow()][position.getColumn()] = null;
     }
 
     /**
