@@ -26,6 +26,7 @@ public class ChessGame {
      */
     public TeamColor getTeamTurn() {
         return this.teamColor;
+
     }
 
     /**
@@ -57,6 +58,7 @@ public class ChessGame {
 
         Collection<ChessMove> moves =  startPiece.pieceMoves(board, startPosition);
         Collection<ChessMove> validMoves = new ArrayList<>();
+
 
         for (ChessMove move: moves){
             MoveCommand moveCommand = new MoveCommand(this,move);
